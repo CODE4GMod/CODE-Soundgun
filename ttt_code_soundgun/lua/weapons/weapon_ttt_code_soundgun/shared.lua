@@ -107,7 +107,7 @@ function VictimDance(song, target, attacker)
       target:GodDisable()
       target:Freeze(false)
       local totalHealth = target:Health()
-      local inflictWep = ents.Create('weapon_ttt_thriller')
+      local inflictWep = ents.Create('weapon_ttt_code_soundgun')
       target:TakeDamage( totalHealth, attacker, inflictWep )
       timer.Simple( 2, function()
         if target:IsFrozen() then
@@ -159,14 +159,17 @@ function AllDance(song, originalTarget, attacker)
     if originalTarget:Alive() then
 
       local totalHealth = originalTarget:Health()
-      local inflictWep = ents.Create('weapon_ttt_thriller')
+      local inflictWep = ents.Create('weapon_ttt_code_soundgun')
       originalTarget:TakeDamage( totalHealth, attacker, inflictWep )
       timer.Simple( 2, function()
+        for k, v in pairs(player.GetAll()) do
+          v:Freeze(false)
+        end
         if originalTarget:IsFrozen() then
           originalTarget:Freeze(false)
-        end -- l.165
-      end) -- l.164
-    end -- l.159
+        end -- l.168
+      end) -- l.167
+    end -- l.162
   end) -- l.151
 
 end -- l.121
@@ -175,7 +178,7 @@ function SWEP:PrimaryAttack()
 
    if not self:CanPrimaryAttack() then
      return
-   end -- l.176
+   end -- l.179
 
    self.Owner:EmitSound("scratch.wav")
    local cone = self.Primary.Cone
@@ -202,9 +205,9 @@ function SWEP:PrimaryAttack()
                                VictimDance(songName, ent, att)
                              else
                                AllDance(songName, ent, att)
-                             end -- l.201
+                             end -- l.204
 
-                          end -- l.197
+                          end -- l.200
                         end -- l.195
                       end -- l.194
 
