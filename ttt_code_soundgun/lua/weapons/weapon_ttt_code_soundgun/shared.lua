@@ -6,15 +6,15 @@ end
 SWEP.HoldType              = "pistol"
 
 if CLIENT then
-   SWEP.PrintName          = "Thriller"
+   SWEP.PrintName          = "CODE Soundgun"
    SWEP.Slot               = 6
 
    SWEP.ViewModelFlip      = false
    SWEP.ViewModelFOV       = 54
-   
+
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing Thriller, \nthen die 14 seconds later."
+      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song, \nthen die 14 seconds later."
    };
 
    SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
@@ -62,12 +62,26 @@ function SWEP:PrimaryAttack()
    bullet.Force	= 10
    bullet.Damage = 1
    bullet.TracerName = "PhyscannonImpact"
-   
+
    bullet.Callback = function(att, tr)
                         if SERVER or (CLIENT and IsFirstTimePredicted()) then
                            local ent = tr.Entity
                               if SERVER and ent:IsPlayer() then
-								ent:EmitSound("thrilcut.wav")
+                local musicChance = math.random(1, 11)
+                local songName = ""
+                if musicChance == 1 then songName ="thrilcut.wav"
+                elseif musicChance == 2 then songName = "bluecut.wav"
+                elseif musicChance == 3 then songName = "highcut.wav"
+                elseif musicChance == 4 then songName = "starcut.wav"
+                elseif musicChance == 5 then songName = "dustcut.wav"
+                elseif musicChance == 6 then songName = "lazycut.wav"
+                elseif musicChance == 7 then songName = "smashcut.wav"
+                elseif musicChance == 8 then songName = "foxcut.wav"
+                elseif musicChance == 9 then songName = "stopcut.wav"
+                elseif musicChange == 10 then songName = "dankcut.wav"
+                else songName = "fuckcut.wav"
+                end
+								ent:EmitSound(songName)
 								ent:GodEnable()
 								local timerName = "reDance" .. math.random(1,10000)
 								timer.Create( timerName, 1, 14, function()
@@ -80,7 +94,7 @@ function SWEP:PrimaryAttack()
 								  if !ent:IsFrozen() then ent:Freeze(true) end
 								end)
 								ent:Freeze(true)
-								timer.Simple( 14, function() 
+								timer.Simple( 14, function()
 									if ent:Alive() then
 									ent:GodDisable()
 									ent:Freeze(false)
@@ -90,7 +104,7 @@ function SWEP:PrimaryAttack()
 									timer.Simple( 2, function() if ent:IsFrozen() then ent:Freeze(false) end end)
 									end
 								end)
-								 
+
                               end
                            end
                         end
@@ -103,4 +117,3 @@ end
 function SWEP:OnDrop()
 	self:Remove()
 end
-            
