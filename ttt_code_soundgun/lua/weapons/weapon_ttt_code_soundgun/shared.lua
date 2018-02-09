@@ -49,7 +49,8 @@ SWEP.IronSightsAng         = Vector(0, 0, 0)
 
 function PickSong() -- This function is in charge of picking songs,
                     -- if you add one, add it here!
-  local musicChance = math.random(1, 12)
+  --local musicChance = math.random(1, 12)
+  local musicChance = 1
 
   -- The following returns the songname, and a bool for special conditions
   if musicChance == 1 then
