@@ -67,8 +67,10 @@ function SWEP:PrimaryAttack()
                         if SERVER or (CLIENT and IsFirstTimePredicted()) then
                            local ent = tr.Entity
                               if SERVER and ent:IsPlayer() then
-                local musicChance = math.random(1, 11)
+
+                local musicChance = math.random(1, 12)
                 local songName = ""
+
                 if musicChance == 1 then songName ="thrilcut.wav"
                 elseif musicChance == 2 then songName = "bluecut.wav"
                 elseif musicChance == 3 then songName = "highcut.wav"
@@ -79,13 +81,16 @@ function SWEP:PrimaryAttack()
                 elseif musicChance == 8 then songName = "foxcut.wav"
                 elseif musicChance == 9 then songName = "stopcut.wav"
                 elseif musicChange == 10 then songName = "dankcut.wav"
+                elseif musicChance == 11 then songName = "spongecut.wav"
                 else songName = "fuckcut.wav"
                 end
+
 								ent:EmitSound(songName)
 								ent:GodEnable()
 								local timerName = "reDance" .. math.random(1,10000)
 								timer.Create( timerName, 1, 14, function()
 								  local danceChange = math.random(1, 2)
+
 								  if danceChange == 1 then
 								    ent:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
 								  else
@@ -93,6 +98,7 @@ function SWEP:PrimaryAttack()
 								  end
 								  if !ent:IsFrozen() then ent:Freeze(true) end
 								end)
+
 								ent:Freeze(true)
 								timer.Simple( 14, function()
 									if ent:Alive() then
@@ -117,3 +123,5 @@ end
 function SWEP:OnDrop()
 	self:Remove()
 end
+
+function
