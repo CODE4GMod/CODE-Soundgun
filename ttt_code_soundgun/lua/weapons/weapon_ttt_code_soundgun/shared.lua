@@ -53,8 +53,8 @@ function PickSong() -- This function is in charge of picking songs,
   local musicChance = 1
 
   -- The following returns the songname, and a bool for special conditions
-  if musicChance == 1 then
-    return "everycut.wav", true -- Thriller, Michael Jackson
+  if musicChance == math.math.random(1, 13)
+    return "everycut.wav", true -- Make you Sweat, C&C
   elseif musicChance == 2 then
     return "bluecut.wav", false -- Blue, Eiffel 65
   elseif musicChance == 3 then
@@ -76,7 +76,7 @@ function PickSong() -- This function is in charge of picking songs,
   elseif musicChance == 11 then
     return "spongecut.wav", false -- Spongebob Theme
   elseif musicChance == 12 then
-    return "thrilcut.wav", false
+    return "thrilcut.wav", false -- Thriller, Michael Jackson
   else
     return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
   end -- l.56
