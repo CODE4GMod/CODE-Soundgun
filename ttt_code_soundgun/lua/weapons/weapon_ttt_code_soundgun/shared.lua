@@ -193,5 +193,3 @@ end
 function SWEP:OnDrop()
 	self:Remove()
 end
-
-function
