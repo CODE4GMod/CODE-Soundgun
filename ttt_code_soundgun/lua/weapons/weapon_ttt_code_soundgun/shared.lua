@@ -120,15 +120,15 @@ end -- l.85
 
 function AllDance(song, originalTarget, attacker)
 
-    for k, v in pairs(players) do
+    for k, v in pairs(player.GetAll()) do
       v:EmitSound(song)
-    end
+    end -- l.125
 
-  local players = player.GetAll()
+
 
   local timerName = "reDance" .. math.random(1,10000)
   timer.Create( timerName, 1, 14, function()
-    for k, v in pairs(players) do
+    for k, v in pairs(player.GetAll()) do
 
       local danceChange = math.random(1, 2)
 
@@ -144,12 +144,12 @@ function AllDance(song, originalTarget, attacker)
     end -- l.131
   end) -- l.130
 
-  for k, v in pairs(players) do
+  for k, v in pairs(player.GetAll()) do
     v:Freeze(true)
   end -- l.147
 
   timer.Simple( 14, function()
-    for k, v in pairs(players) do
+    for k, v in pairs(player.GetAll()) do
       if v:Alive() then
         v:GodDisable()
         v:Freeze(false)
