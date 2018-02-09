@@ -47,23 +47,108 @@ SWEP.LimitedStock = true
 SWEP.IronSightsPos         = Vector(-5.95, -1, 4.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
-function pickSong() -- This function is in charge of picking songs,
+function PickSong() -- This function is in charge of picking songs,
                     -- if you add one, add it here!
   local musicChance = math.random(1, 12)
 
-  if musicChance == 1 then return "thrilcut.wav" -- Thriller, Michael Jackson
-  elseif musicChance == 2 then return "bluecut.wav" -- Blue, Eiffel 65
-  elseif musicChance == 3 then return "highcut.wav" -- Highway to Hell, AC/DC
-  elseif musicChance == 4 then return "starcut.wav" -- Shooting Star, Bag Raiders
-  elseif musicChance == 5 then return "dustcut.wav" -- Another Bites the Dust, Queen
-  elseif musicChance == 6 then return "lazycut.wav" -- Number One, Lazy Town
-  elseif musicChance == 7 then return "smashcut.wav" -- All Star, Smash Mouth
-  elseif musicChance == 8 then return "foxcut.wav" -- The Fox, Ylvis
-  elseif musicChance == 9 then return "stopcut.wav" -- Don't Stop Me Now, Queen
-  elseif musicChange == 10 then return "dankcut.wav" -- PPAP, PIKOTARO
-  elseif musicChance == 11 then return "spongecut.wav" -- Spongebob Theme
-  else return "fuckcut.wav" -- Fuck This Shit I'm out, ???
+  -- The following returns the songname, and a bool for special conditions
+  if musicChance == 1 then
+    return "everycut.wav", true -- Thriller, Michael Jackson
+  elseif musicChance == 2 then
+    return "bluecut.wav", false -- Blue, Eiffel 65
+  elseif musicChance == 3 then
+    return "highcut.wav", false -- Highway to Hell, AC/DC
+  elseif musicChance == 4 then
+    return "starcut.wav", false -- Shooting Star, Bag Raiders
+  elseif musicChance == 5 then
+    return "dustcut.wav", false -- Another Bites the Dust, Queen
+  elseif musicChance == 6 then
+    return "lazycut.wav", false -- Number One, Lazy Town
+  elseif musicChance == 7 then
+    return "smashcut.wav", false -- All Star, Smash Mouth
+  elseif musicChance == 8 then
+    return "foxcut.wav", false -- The Fox, Ylvis
+  elseif musicChance == 9 then
+    return "stopcut.wav", false -- Don't Stop Me Now, Queen
+  elseif musicChange == 10 then
+    return "dankcut.wav", false -- PPAP, PIKOTARO
+  elseif musicChance == 11 then
+    return "spongecut.wav", false -- Spongebob Theme
+  elseif musicChance == 12 then
+    return "thrilcut.wav", false
+  else
+    return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
   end
+end
+
+function VictimDance(song, target, attacker)
+  target:EmitSound(song)
+  target:GodEnable()
+  local timerName = "reDance" .. math.random(1,10000)
+  timer.Create( timerName, 1, 14, function()
+    local danceChange = math.random(1, 2)
+
+    if danceChange == 1 then
+      target:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
+    else
+      target:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
+    end
+    if !target:IsFrozen() then target:Freeze(true) end
+  end)
+
+  target:Freeze(true)
+  timer.Simple( 14, function()
+    if target:Alive() then
+    target:GodDisable()
+    target:Freeze(false)
+    local totalHealth = target:Health()
+    local inflictWep = target.Create('weapon_ttt_thriller')
+    target:TakeDamage( totalHealth, attacker, inflictWep )
+    timer.Simple( 2, function() if target:IsFrozen() then target:Freeze(false) end end)
+    end
+  end)
+
+end
+
+function AllDance(song, originalTarget, attacker)
+  surface.PlaySound(song)
+  local players = player.GetAll()
+
+  local timerName = "reDance" .. math.random(1,10000)
+  timer.Create( timerName, 1, 14, function()
+    for playerEnt in players do
+
+      local danceChange = math.random(1, 2)
+
+      if danceChange == 1 then
+        playerEnt:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
+      else
+        playerEnt:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
+      end
+      if !playerEnt:IsFrozen() then playerEnt:Freeze(true) end
+    end
+  end)
+
+  for playerEnt in players do
+    playerEnt:Freeze(true)
+  end
+    timer.Simple( 14, function()
+      for playerEnt in players do
+        if playerEnt:Alive() then
+          playerEnt:GodDisable()
+          playerEnt:Freeze(false)
+      end
+    end
+    if originalTarget:Alive() then
+
+      local totalHealth = originalTarget:Health()
+      local inflictWep = originalTarget.Create('weapon_ttt_thriller')
+      originalTarget:TakeDamage( totalHealth, attacker, inflictWep )
+      timer.Simple( 2, function() if originalTarget:IsFrozen() then originalTarget:Freeze(false) end end)
+      end
+    end)
+
+
 end
 
 function SWEP:PrimaryAttack()
@@ -87,47 +172,13 @@ function SWEP:PrimaryAttack()
                            local ent = tr.Entity
                               if SERVER and ent:IsPlayer() then
 
-                local songName = pickSong()
+                local songName, special = PickSong()
 
-                if musicChance == 1 then songName ="thrilcut.wav"
-                elseif musicChance == 2 then songName = "bluecut.wav"
-                elseif musicChance == 3 then songName = "highcut.wav"
-                elseif musicChance == 4 then songName = "starcut.wav"
-                elseif musicChance == 5 then songName = "dustcut.wav"
-                elseif musicChance == 6 then songName = "lazycut.wav"
-                elseif musicChance == 7 then songName = "smashcut.wav"
-                elseif musicChance == 8 then songName = "foxcut.wav"
-                elseif musicChance == 9 then songName = "stopcut.wav"
-                elseif musicChange == 10 then songName = "dankcut.wav"
-                elseif musicChance == 11 then songName = "spongecut.wav"
-                else songName = "fuckcut.wav"
+                if !special then
+                  VictimDance(songName, ent, att)
+                else
+                  AllDance(songName, ent, att)
                 end
-
-								ent:EmitSound(songName)
-								ent:GodEnable()
-								local timerName = "reDance" .. math.random(1,10000)
-								timer.Create( timerName, 1, 14, function()
-								  local danceChange = math.random(1, 2)
-
-								  if danceChange == 1 then
-								    ent:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
-								  else
-								    ent:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
-								  end
-								  if !ent:IsFrozen() then ent:Freeze(true) end
-								end)
-
-								ent:Freeze(true)
-								timer.Simple( 14, function()
-									if ent:Alive() then
-									ent:GodDisable()
-									ent:Freeze(false)
-									local totalHealth = ent:Health()
-									local inflictWep = ents.Create('weapon_ttt_thriller')
-									ent:TakeDamage( totalHealth, att, inflictWep )
-									timer.Simple( 2, function() if ent:IsFrozen() then ent:Freeze(false) end end)
-									end
-								end)
 
                               end
                            end
