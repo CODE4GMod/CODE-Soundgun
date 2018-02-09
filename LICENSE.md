@@ -1,3 +1,6 @@
+Please note: This addon is based on the works of "SithLee". their original addon
+can be found here: http://steamcommunity.com/sharedfiles/filedetails/?id=794651430
+All credit goes to him. I got the permission to publish their source and add to it.
 
                                  Apache License
                            Version 2.0, January 2004
