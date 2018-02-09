@@ -119,27 +119,28 @@ function AllDance(song, originalTarget, attacker)
 
   local timerName = "reDance" .. math.random(1,10000)
   timer.Create( timerName, 1, 14, function()
-    for playerEnt in players do
+    for k, v in pairs(players) do
+
 
       local danceChange = math.random(1, 2)
 
       if danceChange == 1 then
-        playerEnt:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
+        v:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
       else
-        playerEnt:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
+        v:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
       end
-      if !playerEnt:IsFrozen() then playerEnt:Freeze(true) end
+      if !v:IsFrozen() then v:Freeze(true) end
     end
   end)
 
-  for playerEnt in players do
-    playerEnt:Freeze(true)
+  for k, v in pairs(players) do
+    v:Freeze(true)
   end
     timer.Simple( 14, function()
-      for playerEnt in players do
-        if playerEnt:Alive() then
-          playerEnt:GodDisable()
-          playerEnt:Freeze(false)
+      for k, v in pairs(players) do
+        if v:Alive() then
+          v:GodDisable()
+          v:Freeze(false)
       end
     end
     if originalTarget:Alive() then
