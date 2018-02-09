@@ -47,6 +47,25 @@ SWEP.LimitedStock = true
 SWEP.IronSightsPos         = Vector(-5.95, -1, 4.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 
+function pickSong() -- This function is in charge of picking songs,
+                    -- if you add one, add it here!
+  local musicChance = math.random(1, 12)
+
+  if musicChance == 1 then return "thrilcut.wav" -- Thriller, Michael Jackson
+  elseif musicChance == 2 then return "bluecut.wav" -- Blue, Eiffel 65
+  elseif musicChance == 3 then return "highcut.wav" -- Highway to Hell, AC/DC
+  elseif musicChance == 4 then return "starcut.wav" -- Shooting Star, Bag Raiders
+  elseif musicChance == 5 then return "dustcut.wav" -- Another Bites the Dust, Queen
+  elseif musicChance == 6 then return "lazycut.wav" -- Number One, Lazy Town
+  elseif musicChance == 7 then return "smashcut.wav" -- All Star, Smash Mouth
+  elseif musicChance == 8 then return "foxcut.wav" -- The Fox, Ylvis
+  elseif musicChance == 9 then return "stopcut.wav" -- Don't Stop Me Now, Queen
+  elseif musicChange == 10 then return "dankcut.wav" -- PPAP, PIKOTARO
+  elseif musicChance == 11 then return "spongecut.wav" -- Spongebob Theme
+  else return "fuckcut.wav" -- Fuck This Shit I'm out, ???
+  end
+end
+
 function SWEP:PrimaryAttack()
    if not self:CanPrimaryAttack() then return end
    self.Owner:EmitSound("scratch.wav")
@@ -68,8 +87,7 @@ function SWEP:PrimaryAttack()
                            local ent = tr.Entity
                               if SERVER and ent:IsPlayer() then
 
-                local musicChance = math.random(1, 12)
-                local songName = ""
+                local songName = pickSong()
 
                 if musicChance == 1 then songName ="thrilcut.wav"
                 elseif musicChance == 2 then songName = "bluecut.wav"
