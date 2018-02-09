@@ -87,7 +87,7 @@ function VictimDance(song, target, attacker)
   target:GodEnable()
   local timerName = "reDance" .. math.random(1,10000)
 
-  timer.Create( timerName, 1, 14, function()
+  timer.Create( timerName, 1, 13, function()
     local danceChange = math.random(1, 2)
 
     if danceChange == 1 then
@@ -127,7 +127,7 @@ function AllDance(song, originalTarget, attacker)
 
 
   local timerName = "reDance" .. math.random(1,10000)
-  timer.Create( timerName, 1, 14, function()
+  timer.Create( timerName, 1, 13, function()
     for k, v in pairs(player.GetAll()) do
 
       local danceChange = math.random(1, 2)
