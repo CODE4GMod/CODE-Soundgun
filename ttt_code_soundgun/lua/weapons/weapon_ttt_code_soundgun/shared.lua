@@ -1,6 +1,6 @@
 if SERVER then
    AddCSLuaFile( "shared.lua" )
-   resource.AddWorkshop("794651430")
+   resource.AddWorkshop("1293479212")
 end
 
 SWEP.HoldType              = "pistol"
