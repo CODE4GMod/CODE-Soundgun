@@ -112,7 +112,9 @@ function VictimDance(song, target, attacker)
 end
 
 function AllDance(song, originalTarget, attacker)
-  surface.PlaySound(song)
+  if CLIENT then
+    surface.PlaySound(song)
+  end
   local players = player.GetAll()
 
   local timerName = "reDance" .. math.random(1,10000)
