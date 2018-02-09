@@ -164,6 +164,7 @@ function AllDance(song, originalTarget, attacker)
       timer.Simple( 2, function()
         for k, v in pairs(player.GetAll()) do
           v:Freeze(false)
+          v:DoAnimationEvent( ACT_RESET, 0)
         end
         if originalTarget:IsFrozen() then
           originalTarget:Freeze(false)
