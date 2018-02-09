@@ -107,7 +107,7 @@ function VictimDance(song, target, attacker)
       target:GodDisable()
       target:Freeze(false)
       local totalHealth = target:Health()
-      local inflictWep = target.Create('weapon_ttt_thriller')
+      local inflictWep = ents.Create('weapon_ttt_thriller')
       target:TakeDamage( totalHealth, attacker, inflictWep )
       timer.Simple( 2, function()
         if target:IsFrozen() then
@@ -159,7 +159,7 @@ function AllDance(song, originalTarget, attacker)
     if originalTarget:Alive() then
 
       local totalHealth = originalTarget:Health()
-      local inflictWep = originalTarget.Create('weapon_ttt_thriller')
+      local inflictWep = ents.Create('weapon_ttt_thriller')
       originalTarget:TakeDamage( totalHealth, attacker, inflictWep )
       timer.Simple( 2, function()
         if originalTarget:IsFrozen() then
