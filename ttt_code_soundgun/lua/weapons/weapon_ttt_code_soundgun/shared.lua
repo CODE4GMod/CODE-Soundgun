@@ -1,7 +1,7 @@
 if SERVER then
    AddCSLuaFile( "shared.lua" )
    resource.AddWorkshop("1293479212")
-end
+end -- l.1
 
 SWEP.HoldType              = "pistol"
 
@@ -18,7 +18,7 @@ if CLIENT then
    };
 
    SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
-end
+end -- l.8
 
 SWEP.Base                  = "weapon_tttbase"
 
@@ -79,13 +79,14 @@ function PickSong() -- This function is in charge of picking songs,
     return "thrilcut.wav", false
   else
     return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
-  end
-end
+  end -- l.56
+end -- l.50
 
 function VictimDance(song, target, attacker)
   target:EmitSound(song)
   target:GodEnable()
   local timerName = "reDance" .. math.random(1,10000)
+
   timer.Create( timerName, 1, 14, function()
     local danceChange = math.random(1, 2)
 
@@ -93,34 +94,41 @@ function VictimDance(song, target, attacker)
       target:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
     else
       target:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
-    end
-    if !target:IsFrozen() then target:Freeze(true) end
-  end)
+    end -- l.93
+
+    if !target:IsFrozen() then target:Freeze(true)
+    end -- l.99
+
+  end) -- l.90
 
   target:Freeze(true)
   timer.Simple( 14, function()
     if target:Alive() then
-    target:GodDisable()
-    target:Freeze(false)
-    local totalHealth = target:Health()
-    local inflictWep = target.Create('weapon_ttt_thriller')
-    target:TakeDamage( totalHealth, attacker, inflictWep )
-    timer.Simple( 2, function() if target:IsFrozen() then target:Freeze(false) end end)
-    end
-  end)
-
-end
+      target:GodDisable()
+      target:Freeze(false)
+      local totalHealth = target:Health()
+      local inflictWep = target.Create('weapon_ttt_thriller')
+      target:TakeDamage( totalHealth, attacker, inflictWep )
+      timer.Simple( 2, function()
+        if target:IsFrozen() then
+          target:Freeze(false)
+        end -- l.113
+      end) -- l.112
+    end -- l.106
+  end) -- l.105
+end -- l.85
 
 function AllDance(song, originalTarget, attacker)
-  if CLIENT then
-    surface.PlaySound(song)
-  end
+
+    for k, v in pairs(players) do
+      v:EmitSound(song)
+    end
+
   local players = player.GetAll()
 
   local timerName = "reDance" .. math.random(1,10000)
   timer.Create( timerName, 1, 14, function()
     for k, v in pairs(players) do
-
 
       local danceChange = math.random(1, 2)
 
@@ -128,35 +136,47 @@ function AllDance(song, originalTarget, attacker)
         v:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
       else
         v:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
-      end
-      if !v:IsFrozen() then v:Freeze(true) end
-    end
-  end)
+      end -- l.135
+
+      if !v:IsFrozen() then
+        v:Freeze(true)
+      end -- l.141
+    end -- l.131
+  end) -- l.130
 
   for k, v in pairs(players) do
     v:Freeze(true)
-  end
-    timer.Simple( 14, function()
-      for k, v in pairs(players) do
-        if v:Alive() then
-          v:GodDisable()
-          v:Freeze(false)
-      end
-    end
+  end -- l.147
+
+  timer.Simple( 14, function()
+    for k, v in pairs(players) do
+      if v:Alive() then
+        v:GodDisable()
+        v:Freeze(false)
+      end -- l.153
+    end -- l.152
+
     if originalTarget:Alive() then
 
       local totalHealth = originalTarget:Health()
       local inflictWep = originalTarget.Create('weapon_ttt_thriller')
       originalTarget:TakeDamage( totalHealth, attacker, inflictWep )
-      timer.Simple( 2, function() if originalTarget:IsFrozen() then originalTarget:Freeze(false) end end)
-      end
-    end)
+      timer.Simple( 2, function()
+        if originalTarget:IsFrozen() then
+          originalTarget:Freeze(false)
+        end -- l.165
+      end) -- l.164
+    end -- l.159
+  end) -- l.151
 
-
-end
+end -- l.121
 
 function SWEP:PrimaryAttack()
-   if not self:CanPrimaryAttack() then return end
+
+   if not self:CanPrimaryAttack() then
+     return
+   end -- l.176
+
    self.Owner:EmitSound("scratch.wav")
    local cone = self.Primary.Cone
    local num = 1
@@ -174,25 +194,26 @@ function SWEP:PrimaryAttack()
    bullet.Callback = function(att, tr)
                         if SERVER or (CLIENT and IsFirstTimePredicted()) then
                            local ent = tr.Entity
-                              if SERVER and ent:IsPlayer() then
+                           if SERVER and ent:IsPlayer() then
 
-                local songName, special = PickSong()
+                             local songName, special = PickSong()
 
-                if !special then
-                  VictimDance(songName, ent, att)
-                else
-                  AllDance(songName, ent, att)
-                end
+                             if !special then
+                               VictimDance(songName, ent, att)
+                             else
+                               AllDance(songName, ent, att)
+                             end -- l.201
 
-                              end
-                           end
-                        end
+                          end -- l.197
+                        end -- l.195
+                      end -- l.194
+
    self.Owner:FireBullets( bullet )
    if SERVER then
      self:TakePrimaryAmmo( 1 )
-   end
-end
+   end -- l. 212
+end -- l. 174
 
 function SWEP:OnDrop()
 	self:Remove()
-end
+end -- l.217
