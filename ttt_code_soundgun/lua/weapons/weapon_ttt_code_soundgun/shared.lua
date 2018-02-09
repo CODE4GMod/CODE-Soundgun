@@ -49,7 +49,7 @@ SWEP.IronSightsAng         = Vector(0, 0, 0)
 
 function SWEP:PrimaryAttack()
    if not self:CanPrimaryAttack() then return end
-   self.Owner:EmitSound("mjow.wav")
+   self.Owner:EmitSound("scratch.wav")
    local cone = self.Primary.Cone
    local num = 1
 
