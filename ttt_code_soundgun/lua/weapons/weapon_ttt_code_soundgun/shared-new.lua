@@ -106,7 +106,19 @@ function SWEP:PrimaryAttack()
   bullet.TracerName = "PhyscannonImpact"
 
   bullet.Callback = function(attacker, target)
-    return nil
+    if SERVER then
+
+      local ent = tr.Entity
+      if ent:IsPlayer() then
+
+        local song, length, special = GetSong()
+
+        if !special then
+          VictimDance(song, length, attacker, target)
+        else
+          AllDance(song, length, attacker, target)
+        end
+        
   end
 
 end
