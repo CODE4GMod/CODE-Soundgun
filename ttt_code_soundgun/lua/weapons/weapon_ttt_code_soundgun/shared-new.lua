@@ -90,6 +90,55 @@ function GetSong()
   return GetSongName(songSeed), length, special
 end
 
+function Freeze(target)
+  target:GodEnable()
+  target:Freeze(true)
+end
+
+function Unfreeze(target)
+  target:GodDisable()
+  target:Freeze(false)
+end
+
+function ForceDance(target)
+  if math.random(1, 2) == 1 then
+    target:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
+  else
+    target:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
+  end
+end
+
+function StopDance(target)
+  target:DoAnimationEvent ( ACT_RESET, 0 )
+end
+
+function DealDamage(target, attacker)
+  local weapon = ents.Create('weapon_ttt_code_soundgun')
+  target:TakeDamage( target:Health(), attacker, weapon)
+end
+
+function NormalSong(song, length, attacker, target)
+
+  PlaySound(target, song)
+  Freeze(target)
+
+  local timerName = "reDance" .. math.random(1,10000)
+
+  timer.Create( timerName, 1, length-1, function()
+    ForceDance(target)
+  end)
+
+
+  timer.Simple( length, function()
+    if target:Alive then
+      Unfreeze(target)
+
+      DealDamage(target, attacker)
+    end
+  end)
+
+end
+
 function SWEP:PrimaryAttack()
 
   if not self:CanPrimaryAttack() then
@@ -118,9 +167,9 @@ function SWEP:PrimaryAttack()
         local song, length, special = GetSong()
 
         if !special then
-          VictimDance(song, length, attacker, target)
+          NormalSong(song, length, attacker, target)
         else
-          AllDance(song, length, attacker, target)
+          SpecialSong(song, length, attacker, target)
         end
 
   end
