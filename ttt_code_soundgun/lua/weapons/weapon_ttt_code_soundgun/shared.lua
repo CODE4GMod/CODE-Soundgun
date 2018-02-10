@@ -78,6 +78,8 @@ function PickSong() -- This function is in charge of picking songs,
     return "thrilcut.wav", false -- Thriller, Michael Jackson
   elseif musicChance == 13 then
     return "endcut.wav", false -- In The End, Linkin Park
+  elseif musicChance == 14 then
+    return "neincut.wav", false -- Nein Mann, Laserkraft 3D
   else
     return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
   end -- l.56
