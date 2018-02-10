@@ -78,3 +78,8 @@ GetRandomSongArray()
   local random = math.random(1, table.getn(songList))
   return songList[random]
 end
+
+GetSong()
+  local songSeed, length, special = GetRandomSongArray()
+  return GetSongName(songSeed), length, special
+end
