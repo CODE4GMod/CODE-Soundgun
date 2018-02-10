@@ -117,6 +117,14 @@ function DealDamage(target, attacker)
   target:TakeDamage( target:Health(), attacker, weapon)
 end
 
+function ForAllPlayers(fun)
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive then
+      target:EmitSound(song)
+    end
+  end
+end
+
 function NormalSong(song, length, attacker, target)
 
   PlaySound(target, song)
@@ -136,6 +144,12 @@ function NormalSong(song, length, attacker, target)
       DealDamage(target, attacker)
     end
   end)
+
+end
+
+function SpecialSong(song, length, attacker, target)
+
+
 
 end
 
