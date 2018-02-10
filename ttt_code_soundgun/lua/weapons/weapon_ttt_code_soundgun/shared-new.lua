@@ -72,16 +72,16 @@ songList = {
   {"fuck",      14,     false }  -- Fuck This Shit I'm out
 }
 
-GetSongName(songSeed)
+function GetSongName(songSeed)
   return songSeed .. "cut.wav"
 end
 
-GetRandomSongArray()
+function GetRandomSongArray()
   local random = math.random(1, table.getn(songList))
   return songList[random]
 end
 
-GetSong()
+function GetSong()
   local songSeed, length, special = GetRandomSongArray()
   return GetSongName(songSeed), length, special
 end
@@ -115,4 +115,8 @@ self.Owner:FireBullets( bullet )
   if SERVER then
     self:TakePrimaryAmmo( bullet.Num )
   end
+end
+
+function SWEP:OnDrop()
+  self:Remove()
 end
