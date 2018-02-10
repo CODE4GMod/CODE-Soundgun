@@ -73,3 +73,8 @@ songList = {
 GetSongName(songSeed)
   return songSeed .. "cut.wav"
 end
+
+GetRandomSongArray()
+  local random = math.random(1, table.getn(songList))
+  return songList[random]
+end
