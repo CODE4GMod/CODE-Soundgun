@@ -72,6 +72,10 @@ songList = {
   {"fuck",      14,     false }  -- Fuck This Shit I'm out
 }
 
+function PlaySound(entity, song)
+  entity:EmitSound(song)
+end
+
 function GetSongName(songSeed)
   return songSeed .. "cut.wav"
 end
@@ -92,7 +96,7 @@ function SWEP:PrimaryAttack()
     return
   end
 
-  self.Owner:EmitSound(soundEffect)
+  PlaySound(self.Owner, soundEffect)
   local cone = self.Primary.Cone
 
   local bullet = {}
@@ -118,7 +122,7 @@ function SWEP:PrimaryAttack()
         else
           AllDance(song, length, attacker, target)
         end
-        
+
   end
 
 end
