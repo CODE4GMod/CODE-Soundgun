@@ -49,7 +49,7 @@ SWEP.IronSightsAng         = Vector(0, 0, 0)
 
 function PickSong() -- This function is in charge of picking songs,
                     -- if you add one, add it here!
-  local musicChance = math.random(1, 14)
+  local musicChance = math.random(1, 16)
 
   -- The following returns the songname, and a bool for special conditions
   if musicChance == 1 then
@@ -80,6 +80,8 @@ function PickSong() -- This function is in charge of picking songs,
     return "endcut.wav", false -- In The End, Linkin Park
   elseif musicChance == 14 then
     return "neincut.wav", false -- Nein Mann, Laserkraft 3D
+  elseif musicChance == 15 then
+    return "countrycut.wav", false -- Country Roads, John Denver
   else
     return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
   end -- l.56
