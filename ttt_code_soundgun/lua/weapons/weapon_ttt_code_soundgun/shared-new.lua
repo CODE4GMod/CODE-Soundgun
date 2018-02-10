@@ -3,6 +3,7 @@ if SERVER then
    resource.AddWorkshop("1293479212")
 end
 
+
 -- SWEP Config
 SWEP.HoldType              = "pistol"
 
@@ -47,3 +48,24 @@ SWEP.LimitedStock = true
 
 SWEP.IronSightsPos         = Vector(-5.95, -1, 4.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
+-- End of SWEP Config
+
+songList = {
+--{SONGNAME(string), LENGTH(int), SPECIAL_FLAG(bool)}
+  {"every",     14,     true  }, -- Make You Sweat,             C+C
+  {"blue",      14,     false }, -- Blue,                       Eiffel 65
+  {"high",      14,     false }, -- Highway to Hell,            AC/DC
+  {"star",      14,     false }, -- Shooting Star,              Bag Raiders
+  {"dust",      14,     false }, -- Another One Bites the Dust, Queen
+  {"lazy",      14,     false }, -- Number One,                 Lazy Town
+  {"smash",     14,     false }, -- All Star,                   Smash Mouth
+  {"fox",       14,     false }, -- The Fox,                    Ylvis
+  {"stop",      14,     false }, -- Don't Stop Me Now,          Queen
+  {"dank",      14,     false }, -- PPAP,                       Pikotaro
+  {"sponge",    14,     false }, -- Spongebob Theme
+  {"thril",     14,     false }, -- Thriller,                   Michael Jackson
+  {"end",       14,     false }, -- In The End,                 Linkin Park
+  {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
+  {"country",   14,     false }, -- Country Roads,              John Denver
+  {"fuck",      14,     false }  -- Fuck This Shit I'm out
+}
