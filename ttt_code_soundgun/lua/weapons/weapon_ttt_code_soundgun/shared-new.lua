@@ -109,8 +109,10 @@ function SWEP:PrimaryAttack()
     return nil
   end
 
-  self.Owner:FireBullets( bullet )
-    if SERVER then
-      self:TakePrimaryAmmo( 1 )
+end
+
+self.Owner:FireBullets( bullet )
+  if SERVER then
+    self:TakePrimaryAmmo( bullet.Num )
   end
 end
