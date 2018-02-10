@@ -20,7 +20,7 @@ if CLIENT then
    };
 
    SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
-end -- l.8
+end 
 
 SWEP.Base                  = "weapon_tttbase"
 
@@ -49,6 +49,8 @@ SWEP.LimitedStock = true
 SWEP.IronSightsPos         = Vector(-5.95, -1, 4.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
 -- End of SWEP Config
+
+soundEffect = "scratch.wav"
 
 songList = {
 --{SONGNAME(string), LENGTH(int), SPECIAL_FLAG(bool)}
@@ -82,4 +84,32 @@ end
 GetSong()
   local songSeed, length, special = GetRandomSongArray()
   return GetSongName(songSeed), length, special
+end
+
+function SWEP:PrimaryAttack()
+
+  if not self:CanPrimaryAttack() then
+    return
+  end
+
+  self.Owner:EmitSound(soundEffect)
+  local cone = self.Primary.Cone
+
+  local bullet = {}
+  bullet.Num        = 1
+  bullet.Src        = self.Owner:GetShootPos()
+  bullet.Dir        = self.Owner:GetAimVector()
+  bullet.Spread     = Vector( cone, cone, 0)
+  bullet.Tracer     = 1
+  bullet.Force      = 10
+  bullet.Damage     = 1
+  bullet.TracerName = "PhyscannonImpact"
+
+  bullet.Callback = function(attacker, target)
+    return nil
+  end
+
+  self.Owner:FireBullets( bullet )
+    return nil
+  end
 end
