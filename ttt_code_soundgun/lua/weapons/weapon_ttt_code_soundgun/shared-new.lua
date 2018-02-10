@@ -69,3 +69,7 @@ songList = {
   {"country",   14,     false }, -- Country Roads,              John Denver
   {"fuck",      14,     false }  -- Fuck This Shit I'm out
 }
+
+GetSongName(songSeed)
+  return songSeed .. "cut.wav"
+end
