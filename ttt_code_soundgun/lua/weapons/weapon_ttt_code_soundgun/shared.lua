@@ -67,7 +67,6 @@ songList = {
   {"thril",     14,     false }, -- Thriller,                   Michael Jackson
   {"end",       14,     false }, -- In The End,                 Linkin Park
   {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
-  {"country",   14,     false }, -- Country Roads,              John Denver
   {"fuck",      14,     false }  -- Fuck This Shit I'm out
 }
 
