@@ -222,7 +222,7 @@ function SWEP:PrimaryAttack()
   bullet.Callback = function(attacker, target)
     if SERVER then
 
-      local ent = tr.Entity
+      local ent = target.Entity
       if ent:IsPlayer() then
 
         local song, length, special = GetSong()
