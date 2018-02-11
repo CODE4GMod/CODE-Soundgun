@@ -117,10 +117,16 @@ function DealDamage(target, attacker)
   target:TakeDamage( target:Health(), attacker, weapon)
 end
 
+function GlobalPlay(song)
+  for key, target in pairs(player.GetAll()) do
+    PlaySound(target, song)
+  end
+end
+
 function ForAllPlayers(fun)
   for key, target in pairs(player.GetAll()) do
     if target:Alive then
-      target:EmitSound(song)
+      fun(target)
     end
   end
 end
@@ -149,7 +155,24 @@ end
 
 function SpecialSong(song, length, attacker, target)
 
+  GlobalPlay(song)
 
+  ForAllPlayers(Freeze)
+
+  local timerName = "reDance" .. math.random(1, 10000)
+  timer.Create( timerName, 1, length-1, function()
+    ForAllPlayers(ForceDance)
+  end)
+
+  timer.Simple( length, function()
+    ForAllPlayers(Unfreeze)
+
+    if target:Alive() then
+      DealDamage(target, attacker)
+    end
+
+    ForAllPlayers(StopDance)
+  end)
 
 end
 
