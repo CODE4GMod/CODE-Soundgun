@@ -228,9 +228,9 @@ function SWEP:PrimaryAttack()
         local song, length, special = GetSong()
 
         if !special then
-          NormalSong(song, length, attacker, target)
+          NormalSong(song, length, attacker, ent)
         else
-          SpecialSong(song, length, attacker, target)
+          SpecialSong(song, length, attacker, ent)
         end
       end
     end
