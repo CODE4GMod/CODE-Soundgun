@@ -81,6 +81,7 @@ function GetSongName(songSeed)
 end
 
 function GetRandomSongArray()
+--  local random = 1
   local random = math.random(1, table.getn(songList))
   return songList[random]
 end
