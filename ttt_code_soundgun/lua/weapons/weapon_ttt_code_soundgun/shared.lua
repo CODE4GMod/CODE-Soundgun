@@ -86,7 +86,7 @@ function GetRandomSongArray()
 end
 
 function GetSong()
-  local songSeed, length, special = GetRandomSongArray()
+  local songSeed, length, special = unpack(GetRandomSongArray())
   return GetSongName(songSeed), length, special
 end
 
