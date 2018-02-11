@@ -1,8 +1,10 @@
 if SERVER then
    AddCSLuaFile( "shared.lua" )
    resource.AddWorkshop("1293479212")
-end -- l.1
+end
 
+
+-- SWEP Config
 SWEP.HoldType              = "pistol"
 
 if CLIENT then
@@ -14,11 +16,11 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song, \nthen die 14 seconds later."
+      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song,\nthen die 14 seconds later."
    };
 
    SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
-end -- l.8
+end 
 
 SWEP.Base                  = "weapon_tttbase"
 
@@ -46,183 +48,201 @@ SWEP.LimitedStock = true
 
 SWEP.IronSightsPos         = Vector(-5.95, -1, 4.799)
 SWEP.IronSightsAng         = Vector(0, 0, 0)
+-- End of SWEP Config
 
-function PickSong() -- This function is in charge of picking songs,
-                    -- if you add one, add it here!
-  local musicChance = math.random(1, 16)
+soundEffect = "scratch.wav"
 
-  -- The following returns the songname, and a bool for special conditions
-  if musicChance == 1 then
-    return "everycut.wav", true -- Make you Sweat, C&C
-  elseif musicChance == 2 then
-    return "bluecut.wav", false -- Blue, Eiffel 65
-  elseif musicChance == 3 then
-    return "highcut.wav", false -- Highway to Hell, AC/DC
-  elseif musicChance == 4 then
-    return "starcut.wav", false -- Shooting Star, Bag Raiders
-  elseif musicChance == 5 then
-    return "dustcut.wav", false -- Another Bites the Dust, Queen
-  elseif musicChance == 6 then
-    return "lazycut.wav", false -- Number One, Lazy Town
-  elseif musicChance == 7 then
-    return "smashcut.wav", false -- All Star, Smash Mouth
-  elseif musicChance == 8 then
-    return "foxcut.wav", false -- The Fox, Ylvis
-  elseif musicChance == 9 then
-    return "stopcut.wav", false -- Don't Stop Me Now, Queen
-  elseif musicChange == 10 then
-    return "dankcut.wav", false -- PPAP, PIKOTARO
-  elseif musicChance == 11 then
-    return "spongecut.wav", false -- Spongebob Theme
-  elseif musicChance == 12 then
-    return "thrilcut.wav", false -- Thriller, Michael Jackson
-  elseif musicChance == 13 then
-    return "endcut.wav", false -- In The End, Linkin Park
-  elseif musicChance == 14 then
-    return "neincut.wav", false -- Nein Mann, Laserkraft 3D
-  elseif musicChance == 15 then
-    return "countrycut.wav", false -- Country Roads, John Denver
-  else
-    return "fuckcut.wav", false -- Fuck This Shit I'm out, ???
-  end -- l.56
-end -- l.50
+songList = {
+--{SONGNAME(string), LENGTH(int), SPECIAL_FLAG(bool)}
+  {"every",     14,     true  }, -- Make You Sweat,             C+C
+  {"blue",      14,     false }, -- Blue,                       Eiffel 65
+  {"high",      14,     false }, -- Highway to Hell,            AC/DC
+  {"star",      14,     false }, -- Shooting Star,              Bag Raiders
+  {"dust",      16,     false }, -- Another One Bites the Dust, Queen
+  {"lazy",      12,     false }, -- Number One,                 Lazy Town
+  {"smash",     18,     false }, -- All Star,                   Smash Mouth
+  {"fox",       15,     false }, -- The Fox,                    Ylvis
+  {"stop",      16,     false }, -- Don't Stop Me Now,          Queen
+  {"dank",      14,     false }, -- PPAP,                       Pikotaro
+  {"thril",     14,     false }, -- Thriller,                   Michael Jackson
+  {"end",       14,     false }, -- In The End,                 Linkin Park
+  {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
+  {"fuck",      14,     false }  -- Fuck This Shit I'm out
+}
 
-function VictimDance(song, target, attacker)
-  target:EmitSound(song)
+function PlaySound(entity, song)
+  entity:EmitSound(song)
+end
+
+function GetSongName(songSeed)
+  return songSeed .. "cut.wav"
+end
+
+function GetRandomSongArray()
+--  local random = 16
+  local random = math.random(1, table.getn(songList))
+  return songList[random]
+end
+
+function GetSong()
+  local songSeed, length, special = unpack(GetRandomSongArray())
+  return GetSongName(songSeed), length, special
+end
+
+function Freeze(target)
   target:GodEnable()
-  local timerName = "reDance" .. math.random(1,10000)
-
-  timer.Create( timerName, 1, 13, function()
-    local danceChange = math.random(1, 2)
-
-    if danceChange == 1 then
-      target:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
-    else
-      target:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
-    end -- l.93
-
-    if !target:IsFrozen() then target:Freeze(true)
-    end -- l.99
-
-  end) -- l.90
-
   target:Freeze(true)
-  timer.Simple( 14, function()
+end
+
+function Unfreeze(target)
+  target:GodDisable()
+  target:Freeze(false)
+end
+
+function ForceDance(target)
+  if math.random(1, 2) == 1 then
+    target:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
+  else
+    target:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
+  end
+end
+
+function StopDance(target)
+  target:DoAnimationEvent ( ACT_RESET, 0 )
+end
+
+function DealDamage(target, attacker)
+  local weapon = ents.Create('weapon_ttt_code_soundgun')
+  target:TakeDamage( target:Health(), attacker, weapon)
+end
+
+function GlobalPlay(song)
+  for key, target in pairs(player.GetAll()) do
+    PlaySound(target, song)
+  end
+end
+
+function FreezeAllPlayers()
+  for key, target in pairs(player.GetAll()) do
     if target:Alive() then
-      target:GodDisable()
-      target:Freeze(false)
-      local totalHealth = target:Health()
-      local inflictWep = ents.Create('weapon_ttt_code_soundgun')
-      target:TakeDamage( totalHealth, attacker, inflictWep )
-      timer.Simple( 2, function()
-        if target:IsFrozen() then
-          target:Freeze(false)
-        end -- l.113
-      end) -- l.112
-    end -- l.106
-  end) -- l.105
-end -- l.85
+      Freeze(target)
+    end
+  end
+end
 
-function AllDance(song, originalTarget, attacker)
+function UnfreezeAllPlayers()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive() then
+      Unfreeze(target)
+    end
+  end
+end
 
-    for k, v in pairs(player.GetAll()) do
-      v:EmitSound(song)
-    end -- l.125
+function ForceEveryPlayerToDance()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive() then
+      ForceDance(target)
+    end
+  end
+end
 
+function StopEveryPlayerDancing()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive() then
+      StopDance(target)
+    end
+  end
+end
 
+function NormalSong(song, length, attacker, target)
+
+  PlaySound(target, song)
+  Freeze(target)
 
   local timerName = "reDance" .. math.random(1,10000)
-  timer.Create( timerName, 1, 13, function()
-    for k, v in pairs(player.GetAll()) do
 
-      local danceChange = math.random(1, 2)
+  timer.Create( timerName, 1, length-1, function()
+    ForceDance(target)
+  end)
 
-      if danceChange == 1 then
-        v:DoAnimationEvent( ACT_GMOD_GESTURE_TAUNT_ZOMBIE, 1641 )
-      else
-        v:DoAnimationEvent( ACT_GMOD_TAUNT_DANCE, 1642 )
-      end -- l.135
 
-      if !v:IsFrozen() then
-        v:Freeze(true)
-      end -- l.141
-    end -- l.131
-  end) -- l.130
+  timer.Simple( length, function()
+    if target:Alive() then
+      Unfreeze(target)
 
-  for k, v in pairs(player.GetAll()) do
-    v:Freeze(true)
-  end -- l.147
+      DealDamage(target, attacker)
+    end
+  end)
 
-  timer.Simple( 14, function()
-    for k, v in pairs(player.GetAll()) do
-      if v:Alive() then
-        v:GodDisable()
-        v:Freeze(false)
-      end -- l.153
-    end -- l.152
+end
 
-    if originalTarget:Alive() then
+function SpecialSong(song, length, attacker, target)
 
-      local totalHealth = originalTarget:Health()
-      local inflictWep = ents.Create('weapon_ttt_code_soundgun')
-      originalTarget:TakeDamage( totalHealth, attacker, inflictWep )
-      timer.Simple( 2, function()
-        for k, v in pairs(player.GetAll()) do
-          v:Freeze(false)
-          v:DoAnimationEvent( ACT_RESET, 0)
-        end
-        if originalTarget:IsFrozen() then
-          originalTarget:Freeze(false)
-        end -- l.168
-      end) -- l.167
-    end -- l.162
-  end) -- l.151
+  GlobalPlay(song)
 
-end -- l.121
+  FreezeAllPlayers()
+
+  local timerName = "reDance" .. math.random(1, 10000)
+  timer.Create( timerName, 1, length-1, function()
+    ForceEveryPlayerToDance()
+  end)
+
+  timer.Simple( length, function()
+    UnfreezeAllPlayers()
+
+    if target:Alive() then
+      DealDamage(target, attacker)
+    end
+
+    StopEveryPlayerDancing()
+  end)
+
+end
 
 function SWEP:PrimaryAttack()
 
-   if not self:CanPrimaryAttack() then
-     return
-   end -- l.179
+  if not self:CanPrimaryAttack() then
+    return
+  end
 
-   self.Owner:EmitSound("scratch.wav")
-   local cone = self.Primary.Cone
-   local num = 1
+  PlaySound(self.Owner, soundEffect)
+  local cone = self.Primary.Cone
 
-   local bullet = {}
-   bullet.Num    = num
-   bullet.Src    = self.Owner:GetShootPos()
-   bullet.Dir    = self.Owner:GetAimVector()
-   bullet.Spread = Vector( cone, cone, 0 )
-   bullet.Tracer = 1
-   bullet.Force	= 10
-   bullet.Damage = 1
-   bullet.TracerName = "PhyscannonImpact"
+  local bullet = {}
+  bullet.Num        = 1
+  bullet.Src        = self.Owner:GetShootPos()
+  bullet.Dir        = self.Owner:GetAimVector()
+  bullet.Spread     = Vector( cone, cone, 0)
+  bullet.Tracer     = 1
+  bullet.Force      = 10
+  bullet.Damage     = 1
+  bullet.TracerName = "PhyscannonImpact"
 
-   bullet.Callback = function(att, tr)
-                        if SERVER or (CLIENT and IsFirstTimePredicted()) then
-                           local ent = tr.Entity
-                           if SERVER and ent:IsPlayer() then
+  bullet.Callback = function(attacker, target)
+    if SERVER then
 
-                             local songName, special = PickSong()
+      local ent = target.Entity
+      if ent:IsPlayer() then
 
-                             if !special then
-                               VictimDance(songName, ent, att)
-                             else
-                               AllDance(songName, ent, att)
-                             end -- l.204
+        local song, length, special = GetSong()
 
-                          end -- l.200
-                        end -- l.195
-                      end -- l.194
+        if !special then
+          NormalSong(song, length, attacker, ent)
+        else
+          SpecialSong(song, length, attacker, ent)
+        end
+      end
+    end
+  end
 
-   self.Owner:FireBullets( bullet )
-   if SERVER then
-     self:TakePrimaryAmmo( 1 )
-   end -- l. 212
-end -- l. 174
+  self.Owner:FireBullets( bullet )
+  if SERVER then
+    self:TakePrimaryAmmo( bullet.Num )
+  end
+
+end
+
 
 function SWEP:OnDrop()
-	self:Remove()
-end -- l.217
+  self:Remove()
+end
