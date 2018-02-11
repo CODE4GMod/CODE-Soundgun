@@ -239,9 +239,8 @@ function SWEP:PrimaryAttack()
 end
 
 self.Owner:FireBullets( bullet )
-  if SERVER then
-    self:TakePrimaryAmmo( bullet.Num )
-  end
+if SERVER then
+  self:TakePrimaryAmmo( 1 )
 end
 
 function SWEP:OnDrop()
