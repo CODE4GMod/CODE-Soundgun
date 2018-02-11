@@ -125,7 +125,7 @@ end
 
 function FreezeAllPlayers()
   for key, target in pairs(player.GetAll()) do
-    if target:Alive then
+    if target:Alive() then
       Freeze(target)
     end
   end
@@ -133,7 +133,7 @@ end
 
 function UnfreezeAllPlayers()
   for key, target in pairs(player.GetAll()) do
-    if target:Alive then
+    if target:Alive() then
       Unfreeze(target)
     end
   end
@@ -141,7 +141,7 @@ end
 
 function ForceEveryPlayerToDance()
   for key, target in pairs(player.GetAll()) do
-    if target:Alive then
+    if target:Alive() then
       ForceDance(target)
     end
   end
@@ -149,7 +149,7 @@ end
 
 function StopEveryPlayerDancing()
   for key, target in pairs(player.GetAll()) do
-    if target:Alive then
+    if target:Alive() then
       StopDance(target)
     end
   end
@@ -168,7 +168,7 @@ function NormalSong(song, length, attacker, target)
 
 
   timer.Simple( length, function()
-    if target:Alive then
+    if target:Alive() then
       Unfreeze(target)
 
       DealDamage(target, attacker)
@@ -232,7 +232,8 @@ function SWEP:PrimaryAttack()
         else
           SpecialSong(song, length, attacker, target)
         end
-
+      end
+    end
   end
 
 end
