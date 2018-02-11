@@ -59,7 +59,7 @@ songList = {
   {"high",      14,     false }, -- Highway to Hell,            AC/DC
   {"star",      14,     false }, -- Shooting Star,              Bag Raiders
   {"dust",      14,     false }, -- Another One Bites the Dust, Queen
-  {"lazy",      14,     false }, -- Number One,                 Lazy Town
+  {"lazy",      12,     false }, -- Number One,                 Lazy Town
   {"smash",     18,     false }, -- All Star,                   Smash Mouth
   {"fox",       15,     false }, -- The Fox,                    Ylvis
   {"stop",      16,     false }, -- Don't Stop Me Now,          Queen
