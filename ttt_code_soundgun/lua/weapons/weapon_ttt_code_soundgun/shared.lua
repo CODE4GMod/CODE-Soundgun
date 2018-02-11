@@ -64,7 +64,6 @@ songList = {
   {"fox",       14,     false }, -- The Fox,                    Ylvis
   {"stop",      14,     false }, -- Don't Stop Me Now,          Queen
   {"dank",      14,     false }, -- PPAP,                       Pikotaro
-  {"sponge",    14,     false }, -- Spongebob Theme
   {"thril",     14,     false }, -- Thriller,                   Michael Jackson
   {"end",       14,     false }, -- In The End,                 Linkin Park
   {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
@@ -81,7 +80,7 @@ function GetSongName(songSeed)
 end
 
 function GetRandomSongArray()
---  local random = 1
+--  local random = 16
   local random = math.random(1, table.getn(songList))
   return songList[random]
 end
