@@ -236,12 +236,13 @@ function SWEP:PrimaryAttack()
     end
   end
 
+  self.Owner:FireBullets( bullet )
+  if SERVER then
+    self:TakePrimaryAmmo( bullet.Num )
+  end
+
 end
 
-self.Owner:FireBullets( bullet )
-if SERVER then
-  self:TakePrimaryAmmo( 1 )
-end
 
 function SWEP:OnDrop()
   self:Remove()
