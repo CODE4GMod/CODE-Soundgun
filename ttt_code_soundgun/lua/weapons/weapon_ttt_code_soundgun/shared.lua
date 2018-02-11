@@ -123,10 +123,34 @@ function GlobalPlay(song)
   end
 end
 
-function ForAllPlayers(fun)
+function FreezeAllPlayers()
   for key, target in pairs(player.GetAll()) do
     if target:Alive then
-      fun(target)
+      Freeze(target)
+    end
+  end
+end
+
+function UnfreezeAllPlayers()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive then
+      Unfreeze(target)
+    end
+  end
+end
+
+function ForceEveryPlayerToDance()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive then
+      ForceDance(target)
+    end
+  end
+end
+
+function StopEveryPlayerDancing()
+  for key, target in pairs(player.GetAll()) do
+    if target:Alive then
+      StopDance(target)
     end
   end
 end
@@ -157,21 +181,21 @@ function SpecialSong(song, length, attacker, target)
 
   GlobalPlay(song)
 
-  ForAllPlayers(Freeze)
+  FreezeAllPlayers()
 
   local timerName = "reDance" .. math.random(1, 10000)
   timer.Create( timerName, 1, length-1, function()
-    ForAllPlayers(ForceDance)
+    ForceEveryPlayerToDance()
   end)
 
   timer.Simple( length, function()
-    ForAllPlayers(Unfreeze)
+    UnfreezeAllPlayers()
 
     if target:Alive() then
       DealDamage(target, attacker)
     end
 
-    ForAllPlayers(StopDance)
+    StopEveryPlayerDancing()
   end)
 
 end
