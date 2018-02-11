@@ -61,7 +61,7 @@ songList = {
   {"dust",      14,     false }, -- Another One Bites the Dust, Queen
   {"lazy",      14,     false }, -- Number One,                 Lazy Town
   {"smash",     14,     false }, -- All Star,                   Smash Mouth
-  {"fox",       14,     false }, -- The Fox,                    Ylvis
+  {"fox",       15,     false }, -- The Fox,                    Ylvis
   {"stop",      16,     false }, -- Don't Stop Me Now,          Queen
   {"dank",      14,     false }, -- PPAP,                       Pikotaro
   {"thril",     14,     false }, -- Thriller,                   Michael Jackson
