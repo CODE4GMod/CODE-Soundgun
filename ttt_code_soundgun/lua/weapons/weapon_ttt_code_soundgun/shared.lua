@@ -20,7 +20,7 @@ if CLIENT then
    };
 
    SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
-end 
+end
 
 SWEP.Base                  = "weapon_tttbase"
 
@@ -67,7 +67,8 @@ songList = {
   {"thril",     14,     false }, -- Thriller,                   Michael Jackson
   {"end",       14,     false }, -- In The End,                 Linkin Park
   {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
-  {"fuck",      14,     false }  -- Fuck This Shit I'm out
+  {"fuck",      14,     false }, -- Fuck This Shit I'm out
+  {"tnt",       19,     false }, -- TNT                         AC/DC
 }
 
 function PlaySound(entity, song)
