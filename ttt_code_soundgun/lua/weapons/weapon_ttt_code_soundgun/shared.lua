@@ -69,6 +69,7 @@ songList = {
   {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
   {"fuck",      14,     false }, -- Fuck This Shit I'm out
   {"tnt",       19,     false }, -- TNT                         AC/DC
+  {"door",      21,     false }  -- The End                     The Doors
 }
 
 function PlaySound(entity, song)
