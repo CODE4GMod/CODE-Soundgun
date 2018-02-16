@@ -75,6 +75,8 @@ songList = {
   {"super",     19,     false }, -- Superperforator             Bully Herbig??
   {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
   {"happen",    15,     false }, -- Untitled                    Simple Plan
+  {"mad",       18,     false }, -- Mad World                   Gary Jules
+  
 
 }
 
