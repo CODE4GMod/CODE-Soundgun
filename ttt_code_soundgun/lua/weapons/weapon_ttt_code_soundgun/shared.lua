@@ -73,7 +73,9 @@ songList = {
   {"immortal",  11,     false }, -- Immortals                   Fall Out Boys
   {"bright",    19,     false }, -- Bright Side Of Life         Eric Idle
   {"super",     19,     false }, -- Superperforator             Bully Herbig??
-  {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas 
+  {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
+  {"happen",    15,     false }, -- Untitled                    Simple Plan
+
 }
 
 function PlaySound(entity, song)
