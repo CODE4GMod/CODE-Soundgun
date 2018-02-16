@@ -69,7 +69,15 @@ songList = {
   {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
   {"fuck",      14,     false }, -- Fuck This Shit I'm out
   {"tnt",       19,     false }, -- TNT                         AC/DC
-  {"door",      21,     false }  -- The End                     The Doors
+  {"door",      21,     false }, -- The End                     The Doors
+  {"immortal",  11,     false }, -- Immortals                   Fall Out Boys
+  {"bright",    19,     false }, -- Bright Side Of Life         Eric Idle
+  {"super",     19,     false }, -- Superperforator             Bully Herbig??
+  {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
+  {"happen",    15,     false }, -- Untitled                    Simple Plan
+  {"mad",       18,     false }, -- Mad World                   Gary Jules
+  {"badday",    13,     false }  -- Bad Day                     Daniel Powter
+
 }
 
 function PlaySound(entity, song)
