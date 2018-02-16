@@ -71,6 +71,8 @@ songList = {
   {"tnt",       19,     false }, -- TNT                         AC/DC
   {"door",      21,     false }, -- The End                     The Doors
   {"immortal",  11,     false }, -- Immortals                   Fall Out Boys
+  {"bright",    19,     false }, -- Bright Side Of Life         Eric Idle
+  
 }
 
 function PlaySound(entity, song)
