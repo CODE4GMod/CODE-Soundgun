@@ -72,7 +72,7 @@ songList = {
   {"door",      21,     false }, -- The End                     The Doors
   {"immortal",  11,     false }, -- Immortals                   Fall Out Boys
   {"bright",    19,     false }, -- Bright Side Of Life         Eric Idle
-  
+  {"super",     19,     false }, -- Superperforator             Bully Herbig??
 }
 
 function PlaySound(entity, song)
