@@ -210,6 +210,28 @@ function SpecialSong(song, length, attacker, target)
 
 end
 
+function ExplosiveSong(song, length, attacker, target)
+
+  PlaySound(target, song)
+  Freeze(target)
+
+  local timerName = "reDance" .. math.random(1,10000)
+
+  timer.Create( timerName, 1, length-1, function()
+    ForceDance(target)
+  end)
+
+
+  timer.Simple( length, function()
+    if target:Alive() then
+      Unfreeze(target)
+
+      DealDamage(target, attacker)
+    end
+  end)
+
+end
+
 function SWEP:PrimaryAttack()
 
   if not self:CanPrimaryAttack() then
@@ -239,6 +261,8 @@ function SWEP:PrimaryAttack()
 
         if (special == 1) then
           SpecialSong(song, length, attacker, ent)
+        else if (special == 2) then
+          ExplosiveSong(song, length, attacker, ent)
         else
           NormalSong(song, length, attacker, ent)
         end
