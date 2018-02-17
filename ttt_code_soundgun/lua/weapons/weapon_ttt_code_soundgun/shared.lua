@@ -53,30 +53,31 @@ SWEP.IronSightsAng         = Vector(0, 0, 0)
 soundEffect = "scratch.wav"
 
 songList = {
---{SONGNAME(string), LENGTH(int), SPECIAL_FLAG(bool)}
-  {"every",     14,     true  }, -- Make You Sweat,             C+C
-  {"blue",      14,     false }, -- Blue,                       Eiffel 65
-  {"high",      14,     false }, -- Highway to Hell,            AC/DC
-  {"star",      14,     false }, -- Shooting Star,              Bag Raiders
-  {"dust",      16,     false }, -- Another One Bites the Dust, Queen
-  {"lazy",      12,     false }, -- Number One,                 Lazy Town
-  {"smash",     18,     false }, -- All Star,                   Smash Mouth
-  {"fox",       15,     false }, -- The Fox,                    Ylvis
-  {"stop",      16,     false }, -- Don't Stop Me Now,          Queen
-  {"dank",      14,     false }, -- PPAP,                       Pikotaro
-  {"thril",     14,     false }, -- Thriller,                   Michael Jackson
-  {"end",       14,     false }, -- In The End,                 Linkin Park
-  {"nein",      14,     false }, -- Nein Mann,                  Laserkraft 3D
-  {"fuck",      14,     false }, -- Fuck This Shit I'm out
-  {"tnt",       19,     false }, -- TNT                         AC/DC
-  {"door",      21,     false }, -- The End                     The Doors
-  {"immortal",  11,     false }, -- Immortals                   Fall Out Boys
-  {"bright",    19,     false }, -- Bright Side Of Life         Eric Idle
-  {"super",     19,     false }, -- Superperforator             Bully Herbig??
-  {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
-  {"happen",    15,     false }, -- Untitled                    Simple Plan
-  {"mad",       18,     false }, -- Mad World                   Gary Jules
-  {"badday",    13,     false }  -- Bad Day                     Daniel Powter
+--{SONGNAME(string), LENGTH(int), SPECIAL_FLAG(int)}
+--0=nothing, 1=everyone, 2=backfire, 3=explosion
+  {"every",     14,     1 }, -- Make You Sweat,             C+C
+  {"blue",      14,     0 }, -- Blue,                       Eiffel 65
+  {"high",      14,     0 }, -- Highway to Hell,            AC/DC
+  {"star",      14,     0 }, -- Shooting Star,              Bag Raiders
+  {"dust",      16,     0 }, -- Another One Bites the Dust, Queen
+  {"lazy",      12,     0 }, -- Number One,                 Lazy Town
+  {"smash",     18,     0 }, -- All Star,                   Smash Mouth
+  {"fox",       15,     0 }, -- The Fox,                    Ylvis
+  {"stop",      16,     0 }, -- Don't Stop Me Now,          Queen
+  {"dank",      14,     0 }, -- PPAP,                       Pikotaro
+  {"thril",     14,     0 }, -- Thriller,                   Michael Jackson
+  {"end",       14,     0 }, -- In The End,                 Linkin Park
+  {"nein",      14,     0 }, -- Nein Mann,                  Laserkraft 3D
+  {"fuck",      14,     0 }, -- Fuck This Shit I'm out
+  {"tnt",       19,     0 }, -- TNT                         AC/DC
+  {"door",      21,     0 }, -- The End                     The Doors
+  {"immortal",  11,     0 }, -- Immortals                   Fall Out Boys
+  {"bright",    19,     0 }, -- Bright Side Of Life         Eric Idle
+  {"super",     19,     0 }, -- Superperforator             Bully Herbig??
+  {"kungfu",    18,     1 }, -- Kung Fu                     Carl Douglas
+  {"happen",    15,     0 }, -- Untitled                    Simple Plan
+  {"mad",       18,     0 }, -- Mad World                   Gary Jules
+  {"badday",    13,     0 }  -- Bad Day                     Daniel Powter
 
 }
 
@@ -236,10 +237,10 @@ function SWEP:PrimaryAttack()
 
         local song, length, special = GetSong()
 
-        if !special then
-          NormalSong(song, length, attacker, ent)
-        else
+        if (special == 1) then
           SpecialSong(song, length, attacker, ent)
+        else
+          NormalSong(song, length, attacker, ent)
         end
       end
     end
