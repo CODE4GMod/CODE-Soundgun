@@ -16,10 +16,10 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song,\nthen die 14 seconds later."
+      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song,\nthen die after the song.\nWarning: May cause everyone to dance; Victim may explode; Attacker may explode."
    };
 
-   SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
+   SWEP.Icon = "vgui/ttt/icon_soundgun.png"
 end
 
 SWEP.Base                  = "weapon_tttbase"
@@ -77,7 +77,6 @@ songList = {
   {"happen",    15,     false }, -- Untitled                    Simple Plan
   {"mad",       18,     false }, -- Mad World                   Gary Jules
   {"badday",    13,     false }  -- Bad Day                     Daniel Powter
-
 }
 
 function PlaySound(entity, song)
