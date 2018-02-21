@@ -16,10 +16,10 @@ if CLIENT then
 
    SWEP.EquipMenuData = {
       type = "item_weapon",
-      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song,\nthen die 14 seconds later."
+      desc = "2 Shots.\n\nCauses victim to dance uncontrollably, and sing a song,\nthen die after the song.\nWarning: May cause everyone to dance; Victim may explode; Attacker may explode."
    };
 
-   SWEP.Icon = "vgui/ttt/icon_thrillerblue.png"
+   SWEP.Icon = "vgui/ttt/icon_soundgun.png"
 end
 
 SWEP.Base                  = "weapon_tttbase"
@@ -76,8 +76,16 @@ songList = {
   {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
   {"happen",    15,     false }, -- Untitled                    Simple Plan
   {"mad",       18,     false }, -- Mad World                   Gary Jules
-  {"badday",    13,     false }  -- Bad Day                     Daniel Powter
-
+  {"badday",    13,     false }, -- Bad Day                     Daniel Powter
+  {"oasis",     17,     false }, -- Wonderwall                  Oasis
+  {"scat",      17,     false }, -- Scatman                     Scatman Jones
+  {"smooth",    15,     false }, -- Smooth Criminal             Michael Jackson
+  {"anfang",    10,     false }, -- Der Anfang ist Nah          Käptn Peng
+  {"science",   25,     false }, -- The Scientist               Coldplay
+  {"fliegen",   14,     false }, -- Sie mögen Sich              Käptn Peng
+  {"care",      15,     false }, -- I don't care                Icona Pop
+  {"nazi",      16,     false }, -- The Nazi Bop                Super Science Friends
+  {"danke",     21,     false }  -- Danke                       Fanta 4
 }
 
 function PlaySound(entity, song)
