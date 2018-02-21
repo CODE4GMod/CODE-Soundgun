@@ -83,6 +83,7 @@ songList = {
   {"anfang",    10,     false }, -- Der Anfang ist Nah          Käptn Peng
   {"science",   25,     false }, -- The Scientist               Coldplay
   {"fliegen",   14,     false }, -- Sie mögen Sich              Käptn Peng
+  {"care",      15,     false }, -- I don't care                Icona Pop
 }
 
 function PlaySound(entity, song)
