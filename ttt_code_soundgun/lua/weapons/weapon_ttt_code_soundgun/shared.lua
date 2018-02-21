@@ -79,6 +79,8 @@ songList = {
   {"badday",    13,     false }, -- Bad Day                     Daniel Powter
   {"oasis",     17,     false }, -- Wonderwall                  Oasis
   {"scat",      17,     false }, -- Scatman                     Scatman Jones
+  {"smooth",    15,     false }, -- Smooth Criminal             Michael Jackson
+
 }
 
 function PlaySound(entity, song)
