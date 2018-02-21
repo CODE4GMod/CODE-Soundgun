@@ -84,6 +84,7 @@ songList = {
   {"science",   25,     false }, -- The Scientist               Coldplay
   {"fliegen",   14,     false }, -- Sie mögen Sich              Käptn Peng
   {"care",      15,     false }, -- I don't care                Icona Pop
+  {"nazi",      16,     false }, -- The Nazi Bop                Super Science Friends
 }
 
 function PlaySound(entity, song)
