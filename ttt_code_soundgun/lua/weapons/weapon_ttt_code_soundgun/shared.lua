@@ -85,6 +85,7 @@ songList = {
   {"fliegen",   14,     false }, -- Sie mögen Sich              Käptn Peng
   {"care",      15,     false }, -- I don't care                Icona Pop
   {"nazi",      16,     false }, -- The Nazi Bop                Super Science Friends
+  {"danke",     21,     false }  -- Danke                       Fanta 4
 }
 
 function PlaySound(entity, song)
