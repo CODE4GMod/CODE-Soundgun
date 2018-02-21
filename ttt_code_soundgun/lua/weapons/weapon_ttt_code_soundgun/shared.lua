@@ -81,7 +81,8 @@ songList = {
   {"scat",      17,     false }, -- Scatman                     Scatman Jones
   {"smooth",    15,     false }, -- Smooth Criminal             Michael Jackson
   {"anfang",    10,     false }, -- Der Anfang ist Nah          Käptn Peng
-  
+  {"science",   25,     false }, -- The Scientist               Coldplay
+  {}
 }
 
 function PlaySound(entity, song)
