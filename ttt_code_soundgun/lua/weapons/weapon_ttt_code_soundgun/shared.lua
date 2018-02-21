@@ -76,7 +76,9 @@ songList = {
   {"kungfu",    18,     true  }, -- Kung Fu                     Carl Douglas
   {"happen",    15,     false }, -- Untitled                    Simple Plan
   {"mad",       18,     false }, -- Mad World                   Gary Jules
-  {"badday",    13,     false }  -- Bad Day                     Daniel Powter
+  {"badday",    13,     false }, -- Bad Day                     Daniel Powter
+  {"oasis",     17,     false }, -- Wonderwall                  Oasis
+  {"scat",      17,     false }, -- Scatman                     Scatman Jones
 }
 
 function PlaySound(entity, song)
