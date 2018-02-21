@@ -2,3 +2,5 @@
 \.DS_Store
 
 ttt_code_soundgun/lua/weapons/weapon_ttt_code_soundgun/erl_crash\.dump
+
+*.gma
