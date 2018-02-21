@@ -82,7 +82,7 @@ songList = {
   {"smooth",    15,     false }, -- Smooth Criminal             Michael Jackson
   {"anfang",    10,     false }, -- Der Anfang ist Nah          Käptn Peng
   {"science",   25,     false }, -- The Scientist               Coldplay
-  {}
+  {"fliegen",   14,     false }, -- Sie mögen Sich              Käptn Peng
 }
 
 function PlaySound(entity, song)
